@@ -335,16 +335,13 @@ Toy Inventory Management System
 
 <div class="box">
 
-<h2>⚙ System</h2>
+<h2>🚀 Server Status</h2>
 
-<p>Node.js</p>
-
-<p>Railway Cloud</p>
-
-<p>HTTP Server</p>
+<p>✔ Node.js Running</p>
+<p>✔ Railway Connected</p>
+<p>✔ HTTP Server Active</p>
 
 <div class="progress">
-
 <span></span>
 
 </div>
