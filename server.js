@@ -316,7 +316,7 @@ color:#888;
 <h1>SERVER ONLINE</h1>
 
 <div class="subtitle">
-Toy Inventory Management System
+TECHNOLOGY CHONBURI
 </div>
 
 <div class="info">
