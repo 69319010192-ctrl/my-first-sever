@@ -1,178 +1,401 @@
-// 1. เรียกใช้งาน Module HTTP
-const http = require('http');
+const http = require("http");
 
-// 2. กำหนด Port
 const port = process.env.PORT || 3000;
 
-// 3. สร้าง Server
 const server = http.createServer((req, res) => {
 
-    res.statusCode = 200;
-    res.setHeader('Content-Type', 'text/html; charset=utf-8');
+res.writeHead(200,{
+"Content-Type":"text/html; charset=utf-8"
+});
 
-    res.end(`
+res.end(`
+
 <!DOCTYPE html>
 <html lang="th">
+
 <head>
+
 <meta charset="UTF-8">
-<title>Cyber Web Server</title>
+
+<title>Cyber Server</title>
 
 <style>
+
 *{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-    font-family:'Segoe UI',sans-serif;
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Segoe UI,sans-serif;
 }
 
 body{
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    height:100vh;
-    background:
-    radial-gradient(circle at top,#8b5cf6,#1a0033 40%,#090014 100%);
-    overflow:hidden;
+
+height:100vh;
+
+display:flex;
+justify-content:center;
+align-items:center;
+
+overflow:hidden;
+
+background:#05010d;
+
 }
 
-/* ดาว */
+/* Animated Background */
+
 body::before{
-    content:'';
-    position:absolute;
-    width:100%;
-    height:100%;
-    background-image:
-    radial-gradient(white 1px,transparent 1px);
-    background-size:35px 35px;
-    opacity:.2;
-    animation:moveStars 30s linear infinite;
+
+content:"";
+
+position:absolute;
+
+width:300%;
+height:300%;
+
+background:
+radial-gradient(circle,#7c3aed33 0%,transparent 20%),
+radial-gradient(circle,#00ffff22 0%,transparent 20%),
+radial-gradient(circle,#ff00ff22 0%,transparent 18%);
+
+background-size:300px 300px;
+
+animation:bgMove 25s linear infinite;
+
 }
 
-@keyframes moveStars{
-    from{transform:translateY(0);}
-    to{transform:translateY(-500px);}
+@keyframes bgMove{
+
+0%{
+transform:translate(-10%,-10%) rotate(0deg);
 }
 
-/* กล่องหลัก */
+100%{
+transform:translate(-30%,-30%) rotate(360deg);
+}
+
+}
+
+/* Scan Line */
+
+body::after{
+
+content:"";
+
+position:absolute;
+
+width:100%;
+height:100%;
+
+background:
+linear-gradient(
+transparent 95%,
+rgba(255,255,255,.03) 100%
+);
+
+background-size:100% 6px;
+
+animation:scan .2s linear infinite;
+
+pointer-events:none;
+
+}
+
+@keyframes scan{
+
+0%{transform:translateY(0);}
+100%{transform:translateY(6px);}
+
+}
+
 .card{
 
-    position:relative;
-    z-index:10;
+position:relative;
 
-    width:750px;
-    padding:50px;
+z-index:10;
 
-    border-radius:25px;
+width:850px;
 
-    background:rgba(255,255,255,.06);
-    backdrop-filter:blur(18px);
+padding:45px;
 
-    border:1px solid rgba(255,255,255,.2);
+border-radius:30px;
 
-    text-align:center;
+background:rgba(255,255,255,.05);
 
-    box-shadow:
-    0 0 25px #8a2be2,
-    0 0 60px #6d28d9;
+backdrop-filter:blur(25px);
+
+border:1px solid #8b5cf655;
+
+box-shadow:
+
+0 0 30px #7c3aed,
+
+0 0 80px #7c3aed55,
+
+inset 0 0 20px #ffffff11;
+
 }
 
-.card h1{
+h1{
 
-    font-size:40px;
-    color:white;
+font-size:55px;
 
-    text-shadow:
-    0 0 10px #b517ff,
-    0 0 25px #b517ff,
-    0 0 45px #8a2be2;
+text-align:center;
 
-    animation:glow 2s infinite alternate;
+color:#fff;
+
+letter-spacing:4px;
+
+text-shadow:
+
+0 0 10px #7c3aed,
+
+0 0 25px #7c3aed,
+
+0 0 45px #ff00ff;
+
+animation:glitch 1.5s infinite;
+
 }
 
-.card h2{
+@keyframes glitch{
 
-    color:#d8b4fe;
-    margin-top:20px;
-    font-size:28px;
+0%{transform:translateX(0);}
+20%{transform:translateX(-2px);}
+40%{transform:translateX(2px);}
+60%{transform:translateX(-1px);}
+80%{transform:translateX(1px);}
+100%{transform:translateX(0);}
+
 }
 
-.card p{
+.subtitle{
 
-    color:#ddd;
-    margin-top:25px;
-    line-height:1.8;
-    font-size:18px;
+margin-top:15px;
+
+text-align:center;
+
+color:#ddd;
+
+font-size:20px;
+
 }
 
-.badge{
+.info{
 
-    margin-top:35px;
-    display:inline-block;
+margin-top:40px;
 
-    padding:14px 35px;
+display:grid;
 
-    border-radius:50px;
+grid-template-columns:1fr 1fr;
 
-    color:white;
-    background:linear-gradient(90deg,#7c3aed,#9333ea,#c026d3);
+gap:25px;
 
-    font-weight:bold;
-
-    box-shadow:
-    0 0 20px #9333ea;
-
-    animation:pulse 2s infinite;
 }
 
-.footer{
+.box{
 
-    margin-top:30px;
-    color:#bfbfbf;
-    font-size:14px;
+background:#ffffff08;
+
+padding:25px;
+
+border-radius:18px;
+
+border:1px solid #ffffff22;
+
 }
 
-@keyframes glow{
+.box h2{
 
-    from{
-        text-shadow:
-        0 0 10px #8a2be2;
-    }
+color:#bb86fc;
 
-    to{
+margin-bottom:15px;
 
-        text-shadow:
-        0 0 25px #ff00ff,
-        0 0 50px #8a2be2;
-    }
+}
+
+.box p{
+
+color:white;
+
+margin:8px 0;
+
+font-size:18px;
+
+}
+
+.progress{
+
+height:15px;
+
+background:#222;
+
+border-radius:30px;
+
+overflow:hidden;
+
+margin-top:8px;
+
+}
+
+.progress span{
+
+display:block;
+
+height:100%;
+
+background:linear-gradient(90deg,#00ffff,#7c3aed,#ff00ff);
+
+animation:load 3s infinite;
+
+}
+
+@keyframes load{
+
+0%{width:20%;}
+50%{width:95%;}
+100%{width:20%;}
+
+}
+
+.status{
+
+margin-top:35px;
+
+text-align:center;
+
+font-size:24px;
+
+font-weight:bold;
+
+color:#00ff88;
+
+text-shadow:0 0 15px #00ff88;
+
+animation:pulse 1.5s infinite;
 
 }
 
 @keyframes pulse{
 
-    0%{
-        transform:scale(1);
-    }
+50%{
+opacity:.4;
+}
 
-    50%{
-        transform:scale(1.08);
-    }
+}
 
- ┌────────────────────────────────────────────┐
-│  ⚡ TOY INVENTORY MANAGEMENT SYSTEM        │
-│────────────────────────────────────────────│
-│                                            │
-│           🚀 SERVER ONLINE                 │
-│                                            │
-│      นายธงชัย ปลุกใจ                      │
-│      รหัส 69319010192                      │
-│                                            │
-│  CPU        ██████████ 98%                 │
-│  MEMORY     ████████░░ 76%                 │
-│  NETWORK    ██████████ Connected           │
-│                                            │
-│  ● Railway Connected                       │
-│  ● Node.js Running                         │
-│  ● Database Ready                          │
-│                                            │
-│         [ ENTER SYSTEM ]                   │
-└────────────────────────────────────────────┘
+.clock{
+
+margin-top:25px;
+
+text-align:center;
+
+font-size:22px;
+
+color:#ffffff;
+
+}
+
+.footer{
+
+margin-top:35px;
+
+text-align:center;
+
+color:#888;
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="card">
+
+<h1>SERVER ONLINE</h1>
+
+<div class="subtitle">
+Toy Inventory Management System
+</div>
+
+<div class="info">
+
+<div class="box">
+
+<h2>👤 ผู้พัฒนา</h2>
+
+<p>นายธงชัย ปลุกใจ</p>
+
+<p>รหัสนักศึกษา</p>
+
+<p><b>69319010192</b></p>
+
+</div>
+
+<div class="box">
+
+<h2>⚙ System</h2>
+
+<p>Node.js</p>
+
+<p>Railway Cloud</p>
+
+<p>HTTP Server</p>
+
+<div class="progress">
+
+<span></span>
+
+</div>
+
+</div>
+
+</div>
+
+<div class="status">
+
+🟢 SYSTEM STATUS : ONLINE
+
+</div>
+
+<div class="clock" id="clock"></div>
+
+<div class="footer">
+
+Powered by Node.js • Railway • Cyber UI
+
+</div>
+
+</div>
+
+<script>
+
+function updateClock(){
+
+const d=new Date();
+
+document.getElementById("clock").innerHTML=
+"🕒 "+d.toLocaleString("th-TH");
+
+}
+
+updateClock();
+
+setInterval(updateClock,1000);
+
+</script>
+
+</body>
+
+</html>
+
+`);
+
+});
+
+server.listen(port,()=>{
+
+console.log("🚀 Server Running : "+port);
+
+});
