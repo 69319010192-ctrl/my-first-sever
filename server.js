@@ -157,50 +157,22 @@ body::before{
         transform:scale(1.08);
     }
 
-    100%{
-        transform:scale(1);
-    }
-
-}
-
-</style>
-
-</head>
-
-<body>
-
-<div class="card">
-
-<h1>🚀 WEB SERVER ONLINE</h1>
-
-<h2>นายธงชัย ปลุกใจ</h2>
-
-<p>
-รหัสนักศึกษา : <b>69319010192</b>
-</p>
-
-<p>
-เครื่องแม่ข่าย Node.js ทำงานเรียบร้อยแล้ว<br>
-พร้อมให้บริการบน <b>Railway Cloud</b>
-</p>
-
-<div class="badge">
-🟢 SERVER STATUS : ONLINE
-</div>
-
-<div class="footer">
-Made with ❤️ using Node.js
-</div>
-
-</div>
-
-</body>
-
-</html>
-`);
-});
-
-// 4. เปิด Server
-server.listen(port, () => {
-    console.log(`🚀 Server is running on port ${port}`);
-});
+ ┌────────────────────────────────────────────┐
+│  ⚡ TOY INVENTORY MANAGEMENT SYSTEM        │
+│────────────────────────────────────────────│
+│                                            │
+│           🚀 SERVER ONLINE                 │
+│                                            │
+│      นายธงชัย ปลุกใจ                      │
+│      รหัส 69319010192                      │
+│                                            │
+│  CPU        ██████████ 98%                 │
+│  MEMORY     ████████░░ 76%                 │
+│  NETWORK    ██████████ Connected           │
+│                                            │
+│  ● Railway Connected                       │
+│  ● Node.js Running                         │
+│  ● Database Ready                          │
+│                                            │
+│         [ ENTER SYSTEM ]                   │
+└────────────────────────────────────────────┘
