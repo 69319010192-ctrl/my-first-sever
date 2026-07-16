@@ -337,9 +337,9 @@ Toy Inventory Management System
 
 <h2>🚀 Server Status</h2>
 
-<p>✔ Node.js Running</p>
-<p>✔ Railway Connected</p>
-<p>✔ HTTP Server Active</p>
+<p>Security : Active</p>
+<p>Cloud : Connected</p>
+<p>Status : Stable</p>
 
 <div class="progress">
 <span></span>
