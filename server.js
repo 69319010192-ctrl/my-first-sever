@@ -1,36 +1,189 @@
-const http = require('http');
-// 1. เรียกใชงาน Pool จากไลบรารี pg สําหรับจัดการการเชื่อมตอฐานขอมูล
-const { Pool } = require('pg');
-// 2. ตั้งคาการเชื่อมตอ โดยดึง URL มาจาก Environment Variable ของ Railway
-const pool = new Pool({
-connectionString: process.env.DATABASE_URL,
-});
-const port = process.env.PORT || 3000;
-const server = http.createServer(async (req, res) => {
-res.statusCode = 200;
-res.setHeader('Content-Type', 'text/html; charset=utf-8');
+let html = `
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<title>Student Database</title>
 
-try {
-// 3. ขอเชื่อมตอและสงคําสั่ง SQL ไปดึงขอมูลจากตาราง students
-const client = await pool.connect();
-const result = await client.query('SELECT * FROM students');
-client.release(); // คนืการเชื่อมตอเมื่อใชงานเสร็จ
-// 4. นําขอมูลที่ได(result.rows) มาประกอบเปนตาราง HTML
-let html = `<h1>ฐานข้อมูลนักศึกษา (ทดสอบการเชื่อมต่อ)</h1>`;
-html += `<table border="1" cellpadding="10">`;
-html += `<tr><th>69319010192</th><th>ธงชัย ปลุกใจ</th></tr>`;
-// วนลูปนําขอมูลแตละแถวมาแสดง
-result.rows.forEach(row => {
-html += `<tr><td>${row.student_id}</td><td>${row.student_name}</td></tr>`;
-});
-html += `</table>`;
-res.end(html);
-} catch (err) {
-// กรณเีชื่อมตอไมไดหรือเขียนชื่อตารางผิด
-console.error(err);
-res.end(`<h1>เกิดขอผิดพลาด!</h1><p>${err.message}</p>`);
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Segoe UI',sans-serif;
 }
-});
-server.listen(port, () => {
-console.log(`Server is running on port: ${port}`);
-});
+
+body{
+
+    height:100vh;
+    overflow:hidden;
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+    background:linear-gradient(180deg,#8fd3ff,#dff6ff,#ffffff);
+
+}
+
+/* หิมะตก */
+
+.snow{
+    position:fixed;
+    width:100%;
+    height:100%;
+    pointer-events:none;
+    top:0;
+    left:0;
+}
+
+.snow span{
+    position:absolute;
+    display:block;
+    width:8px;
+    height:8px;
+    background:white;
+    border-radius:50%;
+    animation:fall linear infinite;
+    opacity:.9;
+}
+
+@keyframes fall{
+
+0%{
+transform:translateY(-10px);
+opacity:0;
+}
+
+100%{
+transform:translateY(105vh);
+opacity:1;
+}
+
+}
+
+/* กล่อง */
+
+.container{
+
+width:900px;
+max-width:95%;
+
+background:rgba(255,255,255,.25);
+
+backdrop-filter:blur(18px);
+
+border-radius:25px;
+
+padding:40px;
+
+box-shadow:0 20px 45px rgba(0,0,0,.2);
+
+z-index:10;
+
+}
+
+/* หัวข้อ */
+
+h1{
+
+text-align:center;
+
+color:#0d47a1;
+
+margin-bottom:25px;
+
+font-size:36px;
+
+}
+
+/* ตาราง */
+
+table{
+
+width:100%;
+
+border-collapse:collapse;
+
+overflow:hidden;
+
+border-radius:15px;
+
+}
+
+th{
+
+background:#1976d2;
+
+color:white;
+
+padding:15px;
+
+}
+
+td{
+
+padding:15px;
+
+background:rgba(255,255,255,.75);
+
+text-align:center;
+
+}
+
+tr:nth-child(even) td{
+
+background:rgba(240,248,255,.85);
+
+}
+
+tr:hover td{
+
+background:#d9f3ff;
+
+transition:.3s;
+
+}
+
+.footer{
+
+margin-top:20px;
+
+text-align:center;
+
+color:#1565c0;
+
+font-weight:bold;
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="snow">
+${Array.from({length:120},(_,i)=>
+`<span style="
+left:${Math.random()*100}%;
+animation-duration:${5+Math.random()*10}s;
+animation-delay:${Math.random()*10}s;
+width:${4+Math.random()*8}px;
+height:${4+Math.random()*8}px;
+"></span>`
+).join('')}
+</div>
+
+<div class="container">
+
+<h1>❄️ ฐานข้อมูลนักศึกษา ❄️</h1>
+
+<table>
+
+<tr>
+<th>รหัสนักศึกษา</th>
+<th>ชื่อ-นามสกุล</th>
+</tr>
+`;
