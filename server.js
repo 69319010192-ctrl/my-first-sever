@@ -8,57 +8,58 @@ let html = `
 <style>
 
 *{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-    font-family:'Segoe UI',sans-serif;
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Segoe UI',sans-serif;
 }
 
 body{
 
-    height:100vh;
-    overflow:hidden;
+background:linear-gradient(135deg,#6dd5fa,#c9f2ff,#ffffff);
 
-    display:flex;
-    justify-content:center;
-    align-items:center;
+display:flex;
+justify-content:center;
+align-items:center;
 
-    background:linear-gradient(180deg,#8fd3ff,#dff6ff,#ffffff);
+min-height:100vh;
+
+overflow:hidden;
 
 }
 
 /* หิมะตก */
 
-.snow{
-    position:fixed;
-    width:100%;
-    height:100%;
-    pointer-events:none;
-    top:0;
-    left:0;
+body::before{
+content:"";
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100%;
+pointer-events:none;
+
+background-image:
+radial-gradient(white 2px,transparent 2px),
+radial-gradient(white 3px,transparent 3px),
+radial-gradient(white 1.5px,transparent 1.5px);
+
+background-size:180px 180px;
+
+animation:snow 18s linear infinite;
+
+opacity:.7;
+
 }
 
-.snow span{
-    position:absolute;
-    display:block;
-    width:8px;
-    height:8px;
-    background:white;
-    border-radius:50%;
-    animation:fall linear infinite;
-    opacity:.9;
+@keyframes snow{
+
+from{
+transform:translateY(-200px);
 }
 
-@keyframes fall{
-
-0%{
-transform:translateY(-10px);
-opacity:0;
-}
-
-100%{
-transform:translateY(105vh);
-opacity:1;
+to{
+transform:translateY(200px);
 }
 
 }
@@ -70,17 +71,15 @@ opacity:1;
 width:900px;
 max-width:95%;
 
-background:rgba(255,255,255,.25);
+padding:35px;
+
+background:rgba(255,255,255,.30);
 
 backdrop-filter:blur(18px);
 
 border-radius:25px;
 
-padding:40px;
-
-box-shadow:0 20px 45px rgba(0,0,0,.2);
-
-z-index:10;
+box-shadow:0 15px 35px rgba(0,0,0,.25);
 
 }
 
@@ -94,7 +93,7 @@ color:#0d47a1;
 
 margin-bottom:25px;
 
-font-size:36px;
+font-size:35px;
 
 }
 
@@ -114,33 +113,35 @@ border-radius:15px;
 
 th{
 
-background:#1976d2;
+background:#2196F3;
 
 color:white;
 
 padding:15px;
 
+font-size:18px;
+
 }
 
 td{
 
-padding:15px;
-
-background:rgba(255,255,255,.75);
+padding:14px;
 
 text-align:center;
+
+background:white;
 
 }
 
 tr:nth-child(even) td{
 
-background:rgba(240,248,255,.85);
+background:#eef8ff;
 
 }
 
 tr:hover td{
 
-background:#d9f3ff;
+background:#d8efff;
 
 transition:.3s;
 
@@ -156,6 +157,8 @@ color:#1565c0;
 
 font-weight:bold;
 
+font-size:18px;
+
 }
 
 </style>
@@ -163,18 +166,6 @@ font-weight:bold;
 </head>
 
 <body>
-
-<div class="snow">
-${Array.from({length:120},(_,i)=>
-`<span style="
-left:${Math.random()*100}%;
-animation-duration:${5+Math.random()*10}s;
-animation-delay:${Math.random()*10}s;
-width:${4+Math.random()*8}px;
-height:${4+Math.random()*8}px;
-"></span>`
-).join('')}
-</div>
 
 <div class="container">
 
