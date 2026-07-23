@@ -207,7 +207,7 @@ ${rows}
 </div>
 
 <div class="footer">
-พัฒนาโดย Node.js + PostgreSQL + Railway
+พัฒนาโดย นายธงชัย ปลุกใจ HIT.1/1 V(A)
 </div>
 
 </div>
